@@ -1,6 +1,8 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+  #scalar type
+  scalar DateTime # define scala type
   type Query {
     me: String!
   }
@@ -17,8 +19,8 @@ module.exports = gql`
     email: String
     images: [Image]
     about: String
-    createdAt: String
-    updatedAt: String
+    createdAt: DateTime
+    updatedAt: DateTime
   }
   #Custom type
   type UserCreateResponse {
@@ -41,6 +43,8 @@ module.exports = gql`
   #Query: to query all the user information to update form
   type Query {
     profile: User!
+    publicProfile(username: String!): User!
+    allUsers: [User!]
   }
   type Mutation {
     userCreate: UserCreateResponse!
